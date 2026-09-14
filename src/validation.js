@@ -6,6 +6,11 @@ function isNumber(value) {
   return typeof value === 'number' && Number.isFinite(value)
 }
 
+function isSkill(value) {
+  return value && isText(value.name) && ['must-have', 'nice-to-have'].includes(value.type)
+}
+
+// Create validater 
 export function validateCandidate(candidate) {
   if (!candidate || typeof candidate !== 'object') return 'A JSON body is required'
   if (!isText(candidate.name)) return 'name is required'
@@ -14,10 +19,6 @@ export function validateCandidate(candidate) {
   if (!isText(candidate.location)) return 'location is required'
   if (!isNumber(candidate.expectedSalary) || candidate.expectedSalary < 0) return 'expectedSalary must be a non-negative number'
   return null
-}
-
-function isSkill(value) {
-  return value && isText(value.name) && ['must-have', 'nice-to-have'].includes(value.type)
 }
 
 export function validateJob(job) {
